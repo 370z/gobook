@@ -4,11 +4,10 @@ WORKDIR /app
 
 COPY . .
 RUN go mod download
-RUN go build -a -o gobook-build-file ./cmd/main.go
+RUN go build ./cmd/main.go -a -o /gobook-build-file
 
-WORKDIR /
-COPY /app/gobook-build-file /bin/app
+
 
 EXPOSE 1323
 
-CMD ["app"]
+CMD ["/gobook-build-file"]
