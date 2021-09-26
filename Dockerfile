@@ -1,15 +1,14 @@
-FROM golang:1.17-alpine3.14
+FROM golang:1.17-alpine3.14 AS build
 
 WORKDIR /app
 
-COPY go.mod ./
-COPY go.sum ./
+COPY . .
 RUN go mod download
+RUN go build -a -installsuffix cgo -o gobook-build-file ./cmd/main.go
 
-COPY *.go ./
-
-RUN go build ./cmd/main.go -o /dist
+WORKDIR /
+COPY --from=build /app/gobook-build-file /bin/app
 
 EXPOSE 1323
 
-CMD ["/dist"]
+CMD ["app"]
