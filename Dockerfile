@@ -1,5 +1,5 @@
 FROM golang:1.17-alpine3.14 AS build
-
+RUN apk add build-base
 WORKDIR /app
 
 COPY . .
