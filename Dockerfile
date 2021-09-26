@@ -8,7 +8,7 @@ RUN go mod download
 
 COPY *.go ./
 
-RUN go build -0 /dist
+RUN go build ./cmd/main.go -o /dist
 
 EXPOSE 1323
 
